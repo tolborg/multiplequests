@@ -1,0 +1,172 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../.rvm/gems/ruby-2.0.0-p643/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 1, ../scss/components/_base.scss */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* line 7, ../scss/components/_base.scss */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+/* line 13, ../scss/components/_base.scss */
+.viewport {
+  position: relative;
+  overflow: hidden;
+  width: 320px;
+  height: 568px;
+  border: solid 1px #000;
+}
+
+/* line 24, ../scss/components/_base.scss */
+.quests {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+/* line 32, ../scss/components/_base.scss */
+.quest {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: calc(100% - 10px);
+  margin: 5px;
+}
+/* line 39, ../scss/components/_base.scss */
+.quest.quest--front {
+  z-index: 1;
+}
+
+/* line 44, ../scss/components/_base.scss */
+.quest__top {
+  position: absolute;
+  bottom: calc(100% - 1px);
+  width: 33.33333%;
+  padding: 5px;
+  border: solid 1px #000;
+  border-bottom: solid 1px #eee;
+  background-color: #eee;
+  transition: left 500ms;
+}
+/* line 54, ../scss/components/_base.scss */
+.quest:nth-child(1) .quest__top {
+  left: 0;
+}
+/* line 57, ../scss/components/_base.scss */
+.quest:nth-child(2) .quest__top {
+  left: 33.33333%;
+}
+/* line 60, ../scss/components/_base.scss */
+.quest:nth-child(3) .quest__top {
+  left: 66.66667%;
+}
+
+/* line 65, ../scss/components/_base.scss */
+.quest__bottom {
+  padding: 5px;
+  border: solid 1px #000;
+  background-color: #eee;
+  line-height: 25px;
+}
+
+/* line 75, ../scss/components/_base.scss */
+.progress {
+  position: relative;
+  border: solid 1px #000;
+  background-color: #555;
+  line-height: 25px;
+}
+
+/* line 82, ../scss/components/_base.scss */
+.progress__bar {
+  background-color: green;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 100%;
+  transition: width 100ms;
+}
+
+/* line 92, ../scss/components/_base.scss */
+.progress__text {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 0 1px #000;
+}
