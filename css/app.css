@@ -102,17 +102,22 @@ body {
 /* line 32, ../scss/components/_base.scss */
 .quest {
   position: absolute;
+  z-index: 1;
   bottom: 0;
   left: 100%;
   width: calc(100% - 10px);
   margin: 5px;
 }
-/* line 39, ../scss/components/_base.scss */
+/* line 40, ../scss/components/_base.scss */
 .quest.quest--front {
-  z-index: 1;
+  z-index: 2;
+}
+/* line 43, ../scss/components/_base.scss */
+.quest.quest--back {
+  z-index: 0;
 }
 
-/* line 44, ../scss/components/_base.scss */
+/* line 48, ../scss/components/_base.scss */
 .quest__top {
   position: absolute;
   bottom: calc(100% - 1px);
@@ -123,20 +128,20 @@ body {
   background-color: #eee;
   transition: left 500ms;
 }
-/* line 54, ../scss/components/_base.scss */
+/* line 58, ../scss/components/_base.scss */
 .quest:nth-child(1) .quest__top {
   left: 0;
 }
-/* line 57, ../scss/components/_base.scss */
+/* line 61, ../scss/components/_base.scss */
 .quest:nth-child(2) .quest__top {
   left: 33.33333%;
 }
-/* line 60, ../scss/components/_base.scss */
+/* line 64, ../scss/components/_base.scss */
 .quest:nth-child(3) .quest__top {
   left: 66.66667%;
 }
 
-/* line 65, ../scss/components/_base.scss */
+/* line 69, ../scss/components/_base.scss */
 .quest__bottom {
   padding: 5px;
   border: solid 1px #000;
@@ -144,7 +149,7 @@ body {
   line-height: 25px;
 }
 
-/* line 75, ../scss/components/_base.scss */
+/* line 79, ../scss/components/_base.scss */
 .progress {
   position: relative;
   border: solid 1px #000;
@@ -152,7 +157,7 @@ body {
   line-height: 25px;
 }
 
-/* line 82, ../scss/components/_base.scss */
+/* line 86, ../scss/components/_base.scss */
 .progress__bar {
   background-color: green;
   position: absolute;
@@ -162,8 +167,12 @@ body {
   right: 100%;
   transition: width 100ms;
 }
+/* line 95, ../scss/components/_base.scss */
+.quest--complete .progress__bar {
+  background-color: blue;
+}
 
-/* line 92, ../scss/components/_base.scss */
+/* line 100, ../scss/components/_base.scss */
 .progress__text {
   position: relative;
   z-index: 1;

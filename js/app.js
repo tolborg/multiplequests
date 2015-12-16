@@ -19,11 +19,10 @@ $(function() {
       $('<div>', { 'class': 'quest__top' }).append($progress).appendTo($quest);
       $('<div>', { 'class': 'quest__bottom' }).text(questText).appendTo($quest);
 
-    $quest.trigger('focusQuest').appendTo($('.quests'));
-
-    $quest.animate({
+    $quest.appendTo($('.quests')).trigger('bringToFront').animate({
       'left': 0
     }, 500);
+
   });
 
 
@@ -36,25 +35,48 @@ $(function() {
       'right': '0'
     }, 100, function() {
       $quest.find('.progress__text').text('COMPLETE');
-      $quest.trigger('focusQuest');
+      $quest.addClass('quest--complete');
 
-      setTimeout(function() {
-        $quest.animate({
-          'left': '-100%'
-        }, 500, function() {
-          $quest.remove();
-          $(document).trigger('addQuest');
-        });
-      }, 500);
+      if ($quest.hasClass('quest--front')) {
+        setTimeout(function() {
+          $quest.trigger('sendToBack');
+          $quest.trigger('moveOut');
+        }, 1000);
+      }
+      else {
+        $quest.trigger('sendToBack');
+        $quest.trigger('moveOut');
+      }
     });
   });
 
 
-  // Subscriber: Focus Quest
-  $(document).on('focusQuest', function(e) {
+
+  // Subscriber: Move out
+  $(document).on('moveOut', function(e) {
+    var $quest = $(e.target);
+
+    $quest.animate({
+      'left': '-100%'
+    }, 500, function() {
+      $quest.remove();
+      $(document).trigger('addQuest');
+    });
+  });
+
+
+  // Subscriber: Bring to Front
+  $(document).on('bringToFront', function(e) {
     var $quest = $(e.target);
     $quest.siblings().removeClass('quest--front');
     $quest.addClass('quest--front');
+  });
+
+  // Subscriber: Send to Back
+  $(document).on('sendToBack', function(e) {
+    var $quest = $(e.target);
+    $quest.siblings().removeClass('quest--back');
+    $quest.addClass('quest--back');
   });
 
 
@@ -62,7 +84,7 @@ $(function() {
 
   // Publishers
   $(document).on('click', '.quest', function(e) {
-    $(this).trigger('focusQuest');
+    $(this).trigger('bringToFront');
   });
 
   $(document).on('click', '.btn--complete', function(e) {
