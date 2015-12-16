@@ -37,16 +37,19 @@ $(function() {
       $quest.find('.progress__text').text('COMPLETE');
       $quest.addClass('quest--complete');
 
-      if ($quest.hasClass('quest--front')) {
-        setTimeout(function() {
-          $quest.trigger('sendToBack');
-          $quest.trigger('moveOut');
-        }, 1000);
-      }
-      else {
-        $quest.trigger('sendToBack');
-        $quest.trigger('moveOut');
-      }
+      $quest.trigger('sendToBack');
+      $quest.trigger('moveOut');
+
+      // if ($quest.hasClass('quest--front')) {
+      //   setTimeout(function() {
+      //     $quest.trigger('sendToBack');
+      //     $quest.trigger('moveOut');
+      //   }, 1000);
+      // }
+      // else {
+      //   $quest.trigger('sendToBack');
+      //   $quest.trigger('moveOut');
+      // }
     });
   });
 
