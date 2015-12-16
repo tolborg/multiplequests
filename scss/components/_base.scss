@@ -1,0 +1,105 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.75em;
+  font-weight: bold;
+}
+
+.viewport {
+  position: relative;
+  overflow: hidden;
+  width: 320px;
+  height: 568px;
+  border: solid 1px #000;
+}
+
+
+
+// Quests
+.quests {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.quest {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 100%;
+  width: calc(100% - 10px);
+  margin: 5px;
+
+  &.quest--front {
+    z-index: 2;
+  }
+  &.quest--back {
+    z-index: 0;
+  }
+}
+
+.quest__top {
+  position: absolute;
+  bottom: calc(100% - 1px);
+  width: (100/3) * 1%;
+  padding: 5px;
+  border: solid 1px #000;
+  border-bottom: solid 1px #eee;
+  background-color: #eee;
+  transition: left 500ms;
+
+  .quest:nth-child(1) & {
+    left: 0;
+  }
+  .quest:nth-child(2) & {
+    left: (100/3) * 1%;
+  }
+  .quest:nth-child(3) & {
+    left: (100/3) * 2 * 1%;
+  }
+}
+
+.quest__bottom {
+  padding: 5px;
+  border: solid 1px #000;
+  background-color: #eee;
+  line-height: 25px;
+}
+
+
+
+// Progress bar
+.progress {
+  position: relative;
+  border: solid 1px #000;
+  background-color: #555;
+  line-height: 25px;
+}
+
+.progress__bar {
+  background-color: green;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 100%;
+  transition: width 100ms;
+
+  .quest--complete & {
+    background-color: blue;
+  }
+}
+
+.progress__text {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 0 1px #000;
+}
