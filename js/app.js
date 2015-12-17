@@ -1,98 +1,90 @@
 $(function() {
 
-  var questTexts = [
-    'Defeat ? Goons with Midas Touch',
-    'Complete ? Portal Quests',
-    'Collect ? Coins'
-  ];
+  var app = {
+    settings: {
+      quests: 10,
+      animationSpeed: 500,
+      progressSpeed: 100
+    },
 
+    createQuest: function () {
+      var $progress = $('<div>', { 'class': 'progress' });
+        $('<div>', { 'class': 'progress__bar' }).appendTo($progress);
+        $('<div>', { 'class': 'progress__text' }).text('0 / 999').appendTo($progress);
+      var $quest = $('<div>', { 'class': 'quest' });
+        $('<div>', { 'class': 'quest__top' }).append($progress).appendTo($quest);
+        $('<div>', { 'class': 'quest__bottom' }).text('QUEST TEXT').appendTo($quest);
 
-  // Subscriber: Add Quest
-  $(document).on('addQuest', function(e) {
-    var questText = questTexts[Math.floor(Math.random() * questTexts.length)];
+      return $quest;
+    },
 
-    var $progress = $('<div>', { 'class': 'progress' });
-      $('<div>', { 'class': 'progress__bar' }).appendTo($progress);
-      $('<div>', { 'class': 'progress__text' }).text('0 / 999').appendTo($progress);
-
-    var $quest = $('<div>', { 'class': 'quest' });
-      $('<div>', { 'class': 'quest__top' }).append($progress).appendTo($quest);
-      $('<div>', { 'class': 'quest__bottom' }).text(questText).appendTo($quest);
-
-    $quest.appendTo($('.quests')).trigger('bringToFront').animate({
-      'left': 0
-    }, 500);
-
-  });
-
-
-  // Subscriber: Complete Quest
-  $(document).on('completeQuest', function(e) {
-    var questNumber = $(e.target).attr('data-quest');
-    var $quest = $('.quest:nth-child(' + questNumber + ')');
-
-    $quest.find('.progress__bar').animate({
-      'right': '0'
-    }, 100, function() {
-      $quest.find('.progress__text').text('COMPLETE');
-      $quest.addClass('quest--complete');
-
-      $quest.trigger('sendToBack');
-      $quest.trigger('moveOut');
-
-      // if ($quest.hasClass('quest--front')) {
-      //   setTimeout(function() {
-      //     $quest.trigger('sendToBack');
-      //     $quest.trigger('moveOut');
-      //   }, 1000);
-      // }
-      // else {
-      //   $quest.trigger('sendToBack');
-      //   $quest.trigger('moveOut');
-      // }
-    });
-  });
-
-
-
-  // Subscriber: Move out
-  $(document).on('moveOut', function(e) {
-    var $quest = $(e.target);
-
-    $quest.animate({
-      'left': '-100%'
-    }, 500, function() {
+    deleteQuest: function ($quest) {
       $quest.remove();
-      $(document).trigger('addQuest');
-    });
-  });
+    },
 
+    insertQuestAtIndex: function ($quest, index) {
+      if (index == 1) {
+        $quest.prependTo('.viewport');
+      }
+      else {
+        $quest.insertAfter('.quest:nth-child(' + (index -1) + ')');
+      }
+    },
 
-  // Subscriber: Bring to Front
-  $(document).on('bringToFront', function(e) {
-    var $quest = $(e.target);
-    $quest.siblings().removeClass('quest--front');
-    $quest.addClass('quest--front');
-  });
+    insertQuestLast: function ($quest) {
+      $quest.appendTo('.viewport');
+    },
 
-  // Subscriber: Send to Back
-  $(document).on('sendToBack', function(e) {
-    var $quest = $(e.target);
-    $quest.siblings().removeClass('quest--back');
-    $quest.addClass('quest--back');
-  });
+    addQuest: function (index) {
+      index = index || 0;
+      var $quest = app.createQuest();
+      if (index != 0) { app.insertQuestAtIndex($quest, index); }
+      else { app.insertQuestLast($quest); }
+      app.bringToFront($quest);
+      app.moveIn($quest);
+    },
 
+    completeQuest: function ($quest) {
+      $quest.find('.progress__bar').animate({
+        'right': '0'
+      }, app.settings.progressSpeed, function () {
+        $quest.find('.progress__text').text('COMPLETE');
+        setTimeout(function() {
+          app.addQuest($quest.index() + 1);
+          app.deleteQuest($quest);
+        }, 500);
+      });
+    },
 
+    bringToFront: function ($quest) {
+      $quest.siblings().removeClass('quest--front');
+      $quest.addClass('quest--front');
+    },
 
+    sendToBack: function ($quest) {
+      $quest.siblings().removeClass('quest--back');
+      $quest.addClass('quest--back');
+    },
 
-  // Publishers
-  $(document).on('click', '.quest', function(e) {
-    $(this).trigger('bringToFront');
-  });
+    moveIn: function ($quest, callback) {
+      callback = callback || function() {};
+      $quest.animate({
+        'bottom': '0'
+      }, app.settings.animationSpeed, function() {
+        callback();
+      });
+    },
 
-  $(document).on('click', '.btn--complete', function(e) {
-    $(this).trigger('completeQuest');
-  });
+    moveOut: function ($quest, callback) {
+      callback = callback || function() {};
+      $quest.animate({
+        'bottom': '-100px'
+      }, app.settings.animationSpeed, function() {
+        callback();
+      });
+    }
+
+  };
 
 
   // Initialize the first 3 quests
@@ -106,8 +98,21 @@ $(function() {
     }, delay);
   };
   setIntervalX(function () {
-    $(document).trigger('addQuest');
-  }, 500, 3);
+    app.addQuest();
+  }, app.settings.animationSpeed, 3);
+
+
+
+
+
+  $(document).on('click', '.btn--complete', function(e) {
+    var index = $(this).attr('data-quest');
+    var $quest = $('.quest:nth-child(' + index + ')');
+    app.completeQuest($quest);
+  });
+
+
+
 
 
 

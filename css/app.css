@@ -90,37 +90,28 @@ body {
   border: solid 1px #000;
 }
 
-/* line 24, ../scss/components/_base.scss */
-.quests {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-}
-
-/* line 32, ../scss/components/_base.scss */
+/* line 23, ../scss/components/_base.scss */
 .quest {
   position: absolute;
   z-index: 1;
-  bottom: 0;
-  left: 100%;
   width: calc(100% - 10px);
+  bottom: -100px;
   margin: 5px;
 }
-/* line 40, ../scss/components/_base.scss */
+/* line 30, ../scss/components/_base.scss */
 .quest.quest--front {
   z-index: 2;
 }
-/* line 43, ../scss/components/_base.scss */
+/* line 33, ../scss/components/_base.scss */
 .quest.quest--back {
   z-index: 0;
 }
 
-/* line 48, ../scss/components/_base.scss */
+/* line 38, ../scss/components/_base.scss */
 .quest__top {
-  position: absolute;
-  bottom: calc(100% - 1px);
+  display: inline-block;
+  position: relative;
+  margin-bottom: -1px;
   width: 33.33333%;
   padding: 5px;
   border: solid 1px #000;
@@ -128,28 +119,29 @@ body {
   background-color: #eee;
   transition: left 500ms;
 }
-/* line 58, ../scss/components/_base.scss */
+/* line 49, ../scss/components/_base.scss */
 .quest:nth-child(1) .quest__top {
   left: 0;
 }
-/* line 61, ../scss/components/_base.scss */
+/* line 52, ../scss/components/_base.scss */
 .quest:nth-child(2) .quest__top {
   left: 33.33333%;
 }
-/* line 64, ../scss/components/_base.scss */
+/* line 55, ../scss/components/_base.scss */
 .quest:nth-child(3) .quest__top {
   left: 66.66667%;
 }
 
-/* line 69, ../scss/components/_base.scss */
+/* line 60, ../scss/components/_base.scss */
 .quest__bottom {
   padding: 5px;
   border: solid 1px #000;
   background-color: #eee;
   line-height: 25px;
+  text-align: center;
 }
 
-/* line 79, ../scss/components/_base.scss */
+/* line 71, ../scss/components/_base.scss */
 .progress {
   position: relative;
   border: solid 1px #000;
@@ -157,7 +149,7 @@ body {
   line-height: 25px;
 }
 
-/* line 86, ../scss/components/_base.scss */
+/* line 78, ../scss/components/_base.scss */
 .progress__bar {
   background-color: green;
   position: absolute;
@@ -167,15 +159,16 @@ body {
   right: 100%;
   transition: width 100ms;
 }
-/* line 95, ../scss/components/_base.scss */
+/* line 87, ../scss/components/_base.scss */
 .quest--complete .progress__bar {
   background-color: blue;
 }
 
-/* line 100, ../scss/components/_base.scss */
+/* line 92, ../scss/components/_base.scss */
 .progress__text {
   position: relative;
   z-index: 1;
   color: #fff;
   text-shadow: 0 0 1px #000;
+  text-align: center;
 }
